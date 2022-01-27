@@ -474,7 +474,7 @@
       </li><!-- End Contact Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="register">
+        <a class="nav-link collapsed" href="registration">
           <i class="bi bi-card-list"></i>
           <span>Register</span>
         </a>
