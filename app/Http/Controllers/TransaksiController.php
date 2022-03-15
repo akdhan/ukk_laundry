@@ -31,22 +31,22 @@ class TransaksiController extends Controller
 
         $transaksi = new transaksi();
         $transaksi->id_member = $request->id_member;
-        $transaksi->tgl_order = Carbon::now();
+        $transaksi->tgl = Carbon::now();
         $transaksi->batas_waktu = Carbon::now()->addDays(3);
         $transaksi->status = 'baru';
-        $transaksi->dibayar = 'belum dibayar';
+        $transaksi->dibayar = 'belum_bayar';
         $transaksi->id_user = $this->user->id;
 
         $transaksi->save();
 
-        $data = transaksi::where('id', '=', $transaksi->id)->first();
+        $data = transaksi::where('id_transaksi', '=', $transaksi->id)->first();
 
         return response()->json(['message' => 'Data transaksi berhasil ditambahkan', 'data' => $data]);}
 
     public function getAll()
     {
-        $data = DB::table('transaksi')->join('member', 'transaksi.id_member', '=', 'member.id')
-                    ->select('transaksi.*', 'member.nama')
+        $data = DB::table('transaksis')->join('members', 'transaksis.id_member', '=', 'members.id_member')
+                    ->select('transaksis.*', 'members.nama_member')
                     ->get();
                     
         return response()->json(['success' => true, 'data' => $data]);

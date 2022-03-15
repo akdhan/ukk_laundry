@@ -4,14 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\member;
+use DB;
 use Illuminate\Support\Facades\Validator;
 
 class MemberController extends Controller
 {
     public function index()
     {
-        $index = member::get();
-        return Response()->json($index);
+        // $index = member::all();
+        // return Response()->json($index);
+        return view('member');
     }
 
     public function create()
@@ -92,5 +94,10 @@ class MemberController extends Controller
         }else{
             return Response()->json(['status'=>'Gagal']);
         }
+    }
+    public function jmlh(){
+        $count=DB::table('members')->count();
+
+        return view('index', compact('count'));
     }
 }

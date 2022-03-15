@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\paket;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use JWTAuth;
 
 class ProdukController extends Controller
 {

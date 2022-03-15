@@ -114,7 +114,7 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
 			'id_outlet' => 'required|numeric',
 			'nama' => 'required|string|max:255',
-			'role' => 'required|string',
+			'type' => 'required|string',
 		]);
 
 		if($validator->fails()){
@@ -128,7 +128,7 @@ class UserController extends Controller
 		$user->id_outlet= $request->id_outlet;
 		$user->nama 	= $request->nama;
 		$user->username = $request->username;
-		$user->role 	= $request->role;
+		$user->type 	= $request->type;
         if($request->password != NULL){
             $user->password = Hash::make($request->password);
         }
