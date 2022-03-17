@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Dashboard - NiceAdmin Bootstrap Template</title>
+  <title>Dashboard - Laundry</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -112,26 +112,26 @@
       </li><!-- End Dashboard Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="forms-nav" data-bs-toggle="collapse" href="/member">
-          <i class="bi bi-journal-text"></i><span>Member</span>
+      <a class="nav-link collapsed" href="/member">
+          <i class="bi bi-person"></i><span>Member</span>
         </a>
        
       </li><!-- End Member Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link collapsed" href="/paket">
           <i class="bi bi-layout-text-window-reverse"></i><span>Paket</span>
         </a>
       </li><!-- End Paket Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link collapsed" href="/outlet">
           <i class="bi bi-cart"></i><span>Outlet</span>
         </a>
       </li><!-- End Outlet Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link collapsed" href="/transaksi">
           <i class="bi bi-currency-dollar"></i><span>Transaksi</span>
         </a>
       </li><!-- End Transaksi Nav -->

@@ -19,17 +19,20 @@ Route::get('/', function () {
     return view('index'); 
 });
 
+Route::get('/member', function () { 
+    return view('member'); 
+});
 
-Route::get('/index', [MemberController::class, 'jmlh']);
+Route::get('/paket', function () { 
+    return view('paket'); 
+});
 
-Route::get('dashboard', [AuthController::class, 'dashboard']); 
-Route::get('login', [AuthController::class, 'index'])->name('login');
-Route::post('custom-login', [AuthController::class, 'customLogin'])->name('login.custom'); 
-Route::get('registration', [AuthController::class, 'registration'])->name('register-user');
-Route::post('custom-registration', [AuthController::class, 'customRegistration'])->name('register.custom'); 
-Route::get('signout', [AuthController::class, 'signOut'])->name('signout'); 
+Route::get('/outlet', function () { 
+    return view('outlet'); 
+});
 
-Route::get('/member', [MemberController::class, 'index']);
+Route::get('/transaksi', function () { 
+    return view('transaksi'); 
+});
 
-Route::get('tambah_member',[MemberController::class,'tambah'])->name('tambah_member');
 

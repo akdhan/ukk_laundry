@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -143,11 +143,11 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Member</h1>
+      <h1>Paket</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
-          <li class="breadcrumb-item active">Member</li>
+          <li class="breadcrumb-item active">Paket</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -156,10 +156,8 @@
                  <table class="table">
                 <thead>
                   <tr>
-                    <th scope="col">Nama Member</th>
-                    <th scope="col">Alamat</th>
-                    <th scope="col">Jenis Kelamin</th>
-                    <th scope="col">Telephone</th>
+                    <th scope="col">Jenis Paket</th>
+                    <th scope="col">Harga</th>
                   </tr>
                 </thead>
                 <tbody>
