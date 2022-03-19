@@ -153,8 +153,12 @@
     </div><!-- End Page Title -->
 
                  <!-- Table with stripped rows -->
+
                  <table class="table">
                 <thead>
+                  <tr>
+                  <th scope="col"><button type="button" class="btn btn-primary" ><a href="/tambahmember"><i class="bi bi-person-plus"></i></a></button></th>
+                  </tr>
                   <tr>
                     <th scope="col">Nama Member</th>
                     <th scope="col">Alamat</th>

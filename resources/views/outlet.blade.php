@@ -155,6 +155,9 @@
                  <!-- Table with stripped rows -->
                  <table class="table">
                 <thead>
+                <tr>
+                  <th scope="col"><button type="button" class="btn btn-primary" ><a href="/tambahoutlet"><i class="bi bi-plus-square-fill"></i></a></button></th>
+                  </tr>
                   <tr>
                     <th scope="col">Alamat Outlet</th>
                     <th scope="col">Telephone</th>

@@ -35,4 +35,12 @@ Route::get('/transaksi', function () {
     return view('transaksi'); 
 });
 
+Route::get('/tambahmember', function () { 
+    return view('tambah_member'); 
+});
+
+Route::get('/tambahoutlet', function () { 
+    return view('tambah_outlet'); 
+});
+
 

@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -147,8 +147,8 @@
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
-          <li class="breadcrumb-item"><a href="/member">Member</a></li>
-          <li class="breadcrumb-item active">Tambah Member</li>
+          <li class="breadcrumb-item"><a href="/outlet">Outlet</a></li>
+          <li class="breadcrumb-item active">Tambah Outlet</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -158,25 +158,13 @@
 
 <div class="card">
   <div class="card-body">
-    <h5 class="card-title">Tambah Data</h5>
+    <h5 class="card-title">Tambah Outlet</h5>
 
     <form class="row g-3">
       <div class="col-12">
-        <label for="nama_member" class="form-label">Nama Member</label>
-        <input type="text" class="form-control" id="nama_member">
-      </div>
-      <div class="col-12">
         <label for="alamat" class="form-label">Alamat</label>
-        <input type="text" class="form-control" id="alamat" placeholder="Sawojajar, Malang">
-      </div>
-      <div class="col-md-4">
-                  <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
-                  <select id="jenis_kelamin" class="form-select">
-                    <option selected>Pilih</option>
-                    <option>Laki - Laki</option>
-                    <option>Perempuan</option>
-                  </select>
-                </div>
+        <input type="text" class="form-control" id="alamat" placeholder="JL. Danau Ranau G5 E26, Sawojajar, Malang">
+      </div> 
       <div class="col-12">
         <label for="tlp" class="form-label">Telephone</label>
         <input type="text" class="form-control" id="tlp">
