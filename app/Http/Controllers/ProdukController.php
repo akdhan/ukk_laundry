@@ -44,8 +44,8 @@ class ProdukController extends Controller
 
     public function show()
     {
-        $show = paket::get();
-        return Response()->json($show);
+        $show = paket::all();
+        return view('paket', ['paket' => $show]);
     }
 
     public function edit($id)

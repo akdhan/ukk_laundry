@@ -49,8 +49,8 @@ class MemberController extends Controller
 
     public function show()
     {
-        $show = member::get();
-        return Response()->json($show);
+        $show = member::all();
+        return view('member', ['member' => $show]);
     }
 
     public function edit($id)

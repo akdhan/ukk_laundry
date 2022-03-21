@@ -105,7 +105,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="/">
+        <a class="nav-link collapsed" href="/">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -125,7 +125,7 @@
       </li><!-- End Paket Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="/outlet">
+        <a class="nav-link" href="/outlet">
           <i class="bi bi-cart"></i><span>Outlet</span>
         </a>
       </li><!-- End Outlet Nav -->
@@ -156,21 +156,41 @@
                  <table class="table">
                 <thead>
                 <tr>
-                  <th scope="col"><button type="button" class="btn btn-primary" ><a href="/tambahoutlet"><i class="bi bi-plus-square-fill"></i></a></button></th>
-                  </tr>
+                <th><a href="/tambahoutlet" class="btn btn-icon btn-primary">Tambah</a></th>
                   <tr>
+                  <th scope="col">No</th>
                     <th scope="col">Alamat Outlet</th>
                     <th scope="col">Telephone</th>
+                    <th scope="col">Opsi</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
+                    @foreach ($outlet as $data)
+                        <tr>
+                            <td>{{ $loop -> iteration }}</td>   
+                            <td>{{ $data -> alamat }}</td>
+                            <td>{{ $data -> telp }}</td>
+                            <td>
+                            <!-- <div class="row">
+                                <div class="col-md-4 offset-md-4">
+                                    <a href="{{ url('member/edit/'.$data->id) }}" class="btn btn-warning btn-sm">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                    <form action="{{ url('member/'.$data->id) }}" method="post" class="d-inline" onsubmit="return confirm('Apakah Anda Yakin?')">
+                                        @method('delete')
+                                        @csrf
+                                        <button class="btn btn-danger btn-sm">
+                                        <i class="fa fa-trash"></i>
+                                    </form>
+                                </div>
+                            </div> -->
+ 
+                              <a href="" class="btn btn-icon btn-warning">Edit</a>
+                              <a href="" class="btn btn-icon btn-danger">Hapus</a>
+        
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
               </table>
               <!-- End Table with stripped rows -->

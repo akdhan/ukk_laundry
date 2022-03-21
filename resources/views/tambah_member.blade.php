@@ -105,14 +105,14 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="/">
+        <a class="nav-link collapsed" href="/">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
       </li><!-- End Dashboard Nav -->
 
       <li class="nav-item">
-      <a class="nav-link collapsed" href="/member">
+      <a class="nav-link" href="/member">
           <i class="bi bi-person"></i><span>Member</span>
         </a>
        

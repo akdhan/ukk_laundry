@@ -43,8 +43,8 @@ class OutletController extends Controller
 
     public function show()
     {
-        $show = outlet::get();
-        return Response()->json($show);
+        $show = outlet::all();
+        return view('outlet', ['outlet' => $show]);
     }
 
     public function edit($id)

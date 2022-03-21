@@ -105,7 +105,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="/">
+        <a class="nav-link collapsed" href="/">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -125,7 +125,7 @@
       </li><!-- End Paket Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="/outlet">
+        <a class="nav-link" href="/outlet">
           <i class="bi bi-cart"></i><span>Outlet</span>
         </a>
       </li><!-- End Outlet Nav -->
