@@ -160,26 +160,27 @@
   <div class="card-body">
     <h5 class="card-title">Tambah Data</h5>
 
-    <form class="row g-3">
+    <form class="row g-3" action="{{route('member_tambah')}}" method="post">
+      @csrf
       <div class="col-12">
         <label for="nama_member" class="form-label">Nama Member</label>
-        <input type="text" class="form-control" id="nama_member">
+        <input type="text" class="form-control" id="nama_member" name="nama_member">
       </div>
       <div class="col-12">
         <label for="alamat" class="form-label">Alamat</label>
-        <input type="text" class="form-control" id="alamat" placeholder="Sawojajar, Malang">
+        <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Sawojajar, Malang">
       </div>
       <div class="col-md-4">
                   <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
-                  <select id="jenis_kelamin" class="form-select">
+                  <select id="jenis_kelamin" class="form-select" name="jenis_kelamin">
                     <option selected>Pilih</option>
-                    <option>Laki - Laki</option>
+                    <option>Laki - laki</option>
                     <option>Perempuan</option>
                   </select>
                 </div>
       <div class="col-12">
         <label for="tlp" class="form-label">Telephone</label>
-        <input type="text" class="form-control" id="tlp">
+        <input type="text" class="form-control" id="tlp" name="tlp">
       </div>
       <div class="text-center">
         <button type="submit" class="btn btn-primary">Submit</button>

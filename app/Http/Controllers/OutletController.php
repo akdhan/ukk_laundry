@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\outlet;
+use DB;
 use Illuminate\Support\Facades\Validator;
 
 class OutletController extends Controller
@@ -34,11 +35,12 @@ class OutletController extends Controller
             'alamat'=>$req->alamat,
             'telp'=>$req->telp,
         ]);
-        if ($sv) {
-            return Response()->json(['status'=>'Berhasil']);
-        }else{
-            return Response()->json(['status'=>'Gagal']);
-        }
+        return redirect('/outlet');
+        // if ($sv) {
+        //     return Response()->json(['status'=>'Berhasil']);
+        // }else{
+        //     return Response()->json(['status'=>'Gagal']);
+        // }
     }
 
     public function show()
@@ -49,7 +51,9 @@ class OutletController extends Controller
 
     public function edit($id)
     {
-        //
+        $outlet1 = DB::table('outlets')->where('id_outlet',$id)->first();
+    
+        return view ('edit_outlet', ['editoutlet' => $outlet1]);
     }
 
     public function update(Request $req, $id)
@@ -59,30 +63,32 @@ class OutletController extends Controller
             'alamat'=>'required',
             'telp'=>'required',
         ]);
-        if ($v->fails()) {
-            $data['status']=false;
-            $data['message']=$v->errors();
-            return Response()->json($data);
-        }
+        // if ($v->fails()) {
+        //     $data['status']=false;
+        //     $data['message']=$v->errors();
+        //     return Response()->json($data);
+        // }
         $sv = outlet::where('id_outlet',$id)->update([
             'id_outlet'=>$req->id_outlet,
             'alamat'=>$req->alamat,
             'telp'=>$req->telp,
         ]);
-        if ($sv) {
-            return Response()->json(['status'=>'Berhasil']);
-        }else{
-            return Response()->json(['status'=>'Gagal']);
-        }
+        return redirect('/outlet');
+        // if ($sv) {
+        //     return Response()->json(['status'=>'Berhasil']);
+        // }else{
+        //     return Response()->json(['status'=>'Gagal']);
+        // }
     }
 
     public function destroy($id)
     {
         $del = outlet::where('id_outlet', $id)->delete();
-        if($del) {
-            return Response()->json(['status'=>'Berhasil']);
-        }else{
-            return Response()->json(['status'=>'Gagal']);
-        }
-    }
+        return redirect('/outlet');
+    //     if($del) {
+    //         return Response()->json(['status'=>'Berhasil']);
+    //     }else{
+    //         return Response()->json(['status'=>'Gagal']);
+    //     }
+     }
 }

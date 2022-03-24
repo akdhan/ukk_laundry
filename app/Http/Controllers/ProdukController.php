@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\paket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use DB;
 use JWTAuth;
 
 class ProdukController extends Controller
@@ -35,11 +36,12 @@ class ProdukController extends Controller
             'jenis'=>$req->jenis,
             'harga'=>$req->harga,
         ]);
-        if ($sv) {
-            return Response()->json(['status'=>'Berhasil']);
-        }else{
-            return Response()->json(['status'=>'Gagal']);
-        }
+        return redirect('/paket');
+        // if ($sv) {
+        //     return Response()->json(['status'=>'Berhasil']);
+        // }else{
+        //     return Response()->json(['status'=>'Gagal']);
+        // }
     }
 
     public function show()
@@ -50,7 +52,12 @@ class ProdukController extends Controller
 
     public function edit($id)
     {
-        //
+        
+        $paket1 = DB::table('pakets')->where('id_paket',$id)->first();
+    
+        return view ('edit_paket', ['editpaket' => $paket1]);
+        // return redirect('/paket');
+        
     }
 
     public function update(Request $req, $id)
@@ -60,30 +67,32 @@ class ProdukController extends Controller
             'jenis'=>'required',
             'harga'=>'required',
         ]);
-        if ($v->fails()) {
-            $data['status']=false;
-            $data['message']=$v->errors();
-            return Response()->json($data);
-        }
+        // if ($v->fails()) {
+        //     $data['status']=false;
+        //     $data['message']=$v->errors();
+        //     return Response()->json($data);
+        // }
         $sv = paket::where('id_paket',$id)->update([
             'id_paket'=>$req->id_paket,
             'jenis'=>$req->jenis,
             'harga'=>$req->harga,
         ]);
-        if ($sv) {
-            return Response()->json(['status'=>'Berhasil']);
-        }else{
-            return Response()->json(['status'=>'Gagal']);
-        }
+        return redirect('/paket');
+        // if ($sv) {
+        //     return Response()->json(['status'=>'Berhasil']);
+        // }else{
+        //     return Response()->json(['status'=>'Gagal']);
+        // }
     }
 
     public function destroy($id)
     {
         $del = paket::where('id_paket', $id)->delete();
-        if($del) {
-            return Response()->json(['status'=>'Berhasil']);
-        }else{
-            return Response()->json(['status'=>'Gagal']);
-        }
+        return redirect('/paket');
+        // if($del) {
+        //     return Response()->json(['status'=>'Berhasil']);
+        // }else{
+        //     return Response()->json(['status'=>'Gagal']);
+        // }
     }
 }

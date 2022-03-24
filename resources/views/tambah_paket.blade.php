@@ -160,14 +160,15 @@
   <div class="card-body">
     <h5 class="card-title">Tambah Data</h5>
 
-    <form class="row g-3">
+    <form class="row g-3" action="{{route('paket_tambah')}}" method="post">
+      @csrf
       <div class="col-12">
         <label for="jenis" class="form-label">Jenis Paket</label>
-        <input type="text" class="form-control" id="jenis">
+        <input type="text" class="form-control" id="jenis" name="jenis">
       </div>
       <div class="col-12">
         <label for="harga" class="form-label">Harga</label>
-        <input type="integer" class="form-control" id="harga">
+        <input type="integer" class="form-control" id="harga" name="harga">
       </div>
       <div class="text-center">
         <button type="submit" class="btn btn-primary">Submit</button>

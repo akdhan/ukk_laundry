@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Dashboard - Laundry</title>
+  <title>Member - Laundry</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -170,30 +170,24 @@
                 </thead>
                 <tbody>
                     @foreach ($member as $data)
-                        <tr class="text-center">
+                        <tr class="text-center"> 
                             <td>{{ $loop -> iteration }}</td>
                             <td>{{ $data -> nama_member}}</td>    
                             <td>{{ $data -> alamat }}</td>
                             <td>{{ $data -> jenis_kelamin }}</td>
                             <td>{{ $data -> tlp }}</td>
                             <td>
-                            <!-- <div class="row">
-                                <div class="col-md-4 offset-md-4">
-                                    <a href="{{ url('member/edit/'.$data->id) }}" class="btn btn-warning btn-sm">
-                                        <i class="fa fa-pencil"></i>
+                            <div class="column">
+                                    <a href="{{ route('editmember', $data->id_member) }}" class="btn btn-warning btn-sm">
+                                        <i class="bi bi-pencil"></i>
                                     </a>
-                                    <form action="{{ url('member/'.$data->id) }}" method="post" class="d-inline" onsubmit="return confirm('Apakah Anda Yakin?')">
+                                    <form action="{{ route('deletemember', $data->id_member) }}" method="post" class="d-inline" onsubmit="return confirm('Apakah Anda Yakin?')">
                                         @method('delete')
                                         @csrf
                                         <button class="btn btn-danger btn-sm">
-                                        <i class="fa fa-trash"></i>
+                                        <i class="bi bi-trash"></i>
                                     </form>
-                                </div>
-                            </div> -->
- 
-                              <a href="" class="btn btn-icon btn-warning">Edit</a>
-                              <a href="" class="btn btn-icon btn-danger">Hapus</a>
-        
+                            </div>
                             </td>
                         </tr>
                     @endforeach

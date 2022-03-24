@@ -112,7 +112,7 @@
       </li><!-- End Dashboard Nav -->
 
       <li class="nav-item">
-      <a class="nav-link collapsed" href="/member">
+      <a class="nav-link" href="/member">
           <i class="bi bi-person"></i><span>Member</span>
         </a>
        
@@ -125,7 +125,7 @@
       </li><!-- End Paket Nav -->
 
       <li class="nav-item">
-        <a class="nav-link" href="/outlet">
+        <a class="nav-link collapsed" href="/outlet">
           <i class="bi bi-cart"></i><span>Outlet</span>
         </a>
       </li><!-- End Outlet Nav -->
@@ -143,39 +143,39 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Tambah Member</h1>
+      <h1>Edit Paket</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
-          <li class="breadcrumb-item"><a href="/outlet">Outlet</a></li>
-          <li class="breadcrumb-item active">Tambah Outlet</li>
+          <li class="breadcrumb-item"><a href="/paket">Paket</a></li>
+          <li class="breadcrumb-item active">Edit Paket</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
 
-              <!-- Forms Tambah -->
-              <div class="col-lg-6">
+              <!-- Forms Edit -->
+              <div class="col-lg-6"> 
 
 <div class="card">
   <div class="card-body">
-    <h5 class="card-title">Tambah Outlet</h5>
+    <h5 class="card-title">Edit Data</h5>
 
-    <form class="row g-3" action="{{route('outlet_tambah')}}" method="post">
-    @csrf
+    <form class="row g-3" action="{{route('paket_edit', $editpaket->id_paket)}}" method="post">
+      @csrf
       <div class="col-12">
-        <label for="alamat" class="form-label">Alamat</label>
-        <input type="text" class="form-control" id="alamat" name="alamat" placeholder="JL. Danau Ranau G5 E26, Sawojajar, Malang">
-      </div> 
+        <label for="jenis" class="form-label">Jenis</label>
+        <input type="text" class="form-control" name="jenis" value="{{$editpaket->jenis}}">
+      </div>
       <div class="col-12">
-        <label for="telp" class="form-label">Telephone</label>
-        <input type="text" class="form-control" id="telp" name="telp">
+        <label for="harga" class="form-label">Harga</label>
+        <input type="integer" class="form-control" name="harga" value="{{$editpaket->harga}}">
       </div>
       <div class="text-center">
         <button type="submit" class="btn btn-primary">Submit</button>
         <button type="reset" class="btn btn-secondary">Reset</button>
       </div>
     </form>
-              <!-- End Forms Tambah -->
+              <!-- End Forms Edit -->
 
             </div>
           </div>

@@ -157,7 +157,7 @@
                 <thead>
                 <tr>
                 <th><a href="/tambahoutlet" class="btn btn-icon btn-primary">Tambah</a></th>
-                  <tr>
+                  <tr class="text-center">
                   <th scope="col">No</th>
                     <th scope="col">Alamat Outlet</th>
                     <th scope="col">Telephone</th>
@@ -166,28 +166,22 @@
                 </thead>
                 <tbody>
                     @foreach ($outlet as $data)
-                        <tr>
+                        <tr class="text-center">
                             <td>{{ $loop -> iteration }}</td>   
                             <td>{{ $data -> alamat }}</td>
                             <td>{{ $data -> telp }}</td>
                             <td>
-                            <!-- <div class="row">
-                                <div class="col-md-4 offset-md-4">
-                                    <a href="{{ url('member/edit/'.$data->id) }}" class="btn btn-warning btn-sm">
-                                        <i class="fa fa-pencil"></i>
+                            <div class="column">
+                                    <a href="{{ route('editoutlet', $data->id_outlet) }}" class="btn btn-warning btn-sm">
+                                        <i class="bi bi-pencil"></i>
                                     </a>
-                                    <form action="{{ url('member/'.$data->id) }}" method="post" class="d-inline" onsubmit="return confirm('Apakah Anda Yakin?')">
+                                    <form action="{{ route('deleteoutlet', $data->id_outlet) }}" method="post" class="d-inline" onsubmit="return confirm('Apakah Anda Yakin?')">
                                         @method('delete')
                                         @csrf
                                         <button class="btn btn-danger btn-sm">
-                                        <i class="fa fa-trash"></i>
+                                        <i class="bi bi-trash"></i>
                                     </form>
-                                </div>
-                            </div> -->
- 
-                              <a href="" class="btn btn-icon btn-warning">Edit</a>
-                              <a href="" class="btn btn-icon btn-danger">Hapus</a>
-        
+                            </div>
                             </td>
                         </tr>
                     @endforeach

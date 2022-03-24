@@ -17,8 +17,8 @@ class CreateMembersTable extends Migration
             $table->bigIncrements('id_member');
             $table->string('nama_member');
             $table->string('alamat');
-            $table->enum('jenis_kelamin', ['Laki-laki','Perempuan']);
-            $table->BigInteger('tlp');
+            $table->enum('jenis_kelamin', ['Laki - laki','Perempuan']);
+            $table->string('tlp');
             $table->timestamps();
         });
     }

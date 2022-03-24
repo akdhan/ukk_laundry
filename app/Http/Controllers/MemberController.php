@@ -23,6 +23,7 @@ class MemberController extends Controller
 
     public function store(Request $req)
     {
+        // dd($req);
         $v = Validator::make($req->all(),[
             // 'id_member'=>'required',
             'nama_member'=>'required',
@@ -40,11 +41,12 @@ class MemberController extends Controller
             'jenis_kelamin'=>$req->jenis_kelamin,
             'tlp'=>$req->tlp,
         ]);
-        if ($sv) {
-            return Response()->json(['status'=>'Berhasil']);
-        }else{
-            return Response()->json(['status'=>'Gagal']);
-        }
+        return redirect('/member');
+        // if ($sv) {
+        //     return Response()->json(['status'=>'Berhasil']);
+        // }else{
+        //     return Response()->json(['status'=>'Gagal']);
+        // }
     }
 
     public function show()
@@ -55,7 +57,10 @@ class MemberController extends Controller
 
     public function edit($id)
     {
-        //
+        $member1 = DB::table('members')->where('id_member',$id)->first();
+
+        return view ('edit_member', ['editmember' => $member1]);
+        return redirect('/member');
     }
 
     public function update(Request $req, $id)
@@ -67,11 +72,11 @@ class MemberController extends Controller
             'jenis_kelamin'=>'required',
             'tlp'=>'required',
         ]);
-        if ($v->fails()) {
-            $data['status']=false;
-            $data['message']=$v->errors();
-            return Response()->json($data);
-        }
+        // if ($v->fails()) {
+        //     $data['status']=false;
+        //     $data['message']=$v->errors();
+        //     return Response()->json($data);
+        // }
         $sv = member::where('id_member',$id)->update([
             'id_member'=>$req->id_member,
             'nama_member'=>$req->nama_member,
@@ -79,21 +84,23 @@ class MemberController extends Controller
             'jenis_kelamin'=>$req->jenis_kelamin,
             'tlp'=>$req->tlp,
         ]);
-        if ($sv) {
-            return Response()->json(['status'=>'Berhasil']);
-        }else{
-            return Response()->json(['status'=>'Gagal']);
-        }
+        return redirect('/member');
+        // if ($sv) {
+        //     return Response()->json(['status'=>'Berhasil']);
+        // }else{
+        //     return Response()->json(['status'=>'Gagal']);
+        // }
     }
 
     public function destroy($id)
     {
         $del = member::where('id_member', $id)->delete();
-        if($del) {
-            return Response()->json(['status'=>'Berhasil']);
-        }else{
-            return Response()->json(['status'=>'Gagal']);
-        }
+        return redirect('/member');
+        // if($del) {
+        //     return Response()->json(['status'=>'Berhasil']);
+        // }else{
+        //     return Response()->json(['status'=>'Gagal']);
+        // }
     }
     public function jmlh(){
         $count=DB::table('members')->count();
