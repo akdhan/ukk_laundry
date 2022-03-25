@@ -43,7 +43,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="/" class="logo d-flex align-items-center">
+      <a href="/index" class="logo d-flex align-items-center">
         <span class="d-none d-lg-block">Xi Laundry</span>
       </a><br>
       <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -85,7 +85,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="{{ route('logout') }}">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sign Out</span>
               </a>
@@ -105,7 +105,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="/">
+        <a class="nav-link " href="/index">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -146,7 +146,7 @@
       <h1>Dashboard</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index">Home</a></li>
+          <li class="breadcrumb-item"><a href="/index">Home</a></li>
           <li class="breadcrumb-item active">Dashboard</li>
         </ol>
       </nav>
@@ -171,7 +171,9 @@
                     <i class="bi bi-people"></i>
                     </div>
                     <div class="ps-3">
-                      <h6> </h6>
+                      <h6> 
+
+                      </h6>
                     </div>
                   </div>
                 </div>

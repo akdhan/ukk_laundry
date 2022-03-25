@@ -60,7 +60,6 @@ class MemberController extends Controller
         $member1 = DB::table('members')->where('id_member',$id)->first();
 
         return view ('edit_member', ['editmember' => $member1]);
-        return redirect('/member');
     }
 
     public function update(Request $req, $id)
@@ -103,8 +102,8 @@ class MemberController extends Controller
         // }
     }
     public function jmlh(){
-        $count=DB::table('members')->count();
+        $tampilr=DB::table('members')->count();
 
-        return view('index', compact('count'));
+        return view('index', compact('tampil'));
     }
 }

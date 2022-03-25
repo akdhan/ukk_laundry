@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use JWTAuth;
+use Auth;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use DB;
 
 class UserController extends Controller
 {
@@ -30,22 +32,19 @@ class UserController extends Controller
             'type' => $request->get('type'),
         ]);
 
-        $token = JWTAuth::fromUser($user);
+        // $token = JWTAuth::fromUser($user);
 
-        return response()->json(compact('user', 'token'), 201);
+        return redirect('/')->with('message-simpan', 'Berhasil Membuat Akun');
     }
     
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
-        try {
-            if (! $token = JWTAuth::attempt($credentials)) {
-                return response()->json(['error' => 'invalid_credentials'], 400);
-            }
-        } catch (JWTException $e) {
-            return response()->json(['error' => 'could_not_create_token'], 500);
+        if (Auth::attempt($credentials)) {
+            return redirect('/index')->with('message', 'Berhasil Login');
         }
-        return response()->json(compact('token'));
+
+        return redirect('/')->with('alert', 'Email atau password salah!');
     }
     
     public function getAuthenticatedUser()
@@ -96,17 +95,8 @@ class UserController extends Controller
 
     public function logout(Request $request)
     {
-        if(JWTAuth::invalidate(JWTAuth::getToken())) {
-            return response()->json([
-                'success' => true,
-                'message' => 'You are logged out.',
-            ]);
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'Logged out failed.',
-            ]);
-        }
+        Auth::logout();
+        return redirect('/');
     }
 
     public function update(Request $request, $id)
@@ -177,5 +167,9 @@ class UserController extends Controller
             'success' => true,
             'data' => $data
         ]);
+    }
+    public function halamanlogin()
+    {
+        return view ('login');
     }
 }

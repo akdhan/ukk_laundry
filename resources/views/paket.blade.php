@@ -43,7 +43,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="/" class="logo d-flex align-items-center">
+      <a href="/index" class="logo d-flex align-items-center">
         <span class="d-none d-lg-block">Xi Laundry</span>
       </a><br>
       <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -105,7 +105,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="/">
+        <a class="nav-link collapsed" href="/index">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>

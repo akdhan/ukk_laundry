@@ -17,8 +17,8 @@ use App\Http\Controllers\ProdukController;
 |
 */
 
-Route::get('/', function () { 
-    return view('index'); 
+Route::get('/index', function () { 
+    return view('/index'); 
 });
 //member
 Route::get('/member',[MemberController::class,'show'])->name('member');
@@ -55,6 +55,20 @@ Route::get('/transaksi', function () {
     return view('transaksi'); 
 });
 
+//login
+Route::get('/', function () {
+    return view('login');
+});
+Route::post('/', [UserController::class, 'login'])->name('postlogin');
+
+//register
+Route::get('/register', function(){
+    return view('register');
+});
+Route::post('/postregister', [UserController::class, 'register'])->name('postregister');
+
+//logout
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 
 
