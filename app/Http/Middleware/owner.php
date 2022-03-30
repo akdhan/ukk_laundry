@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class kasir
+class owner
 {
     /**
      * Handle an incoming request.
@@ -17,11 +17,12 @@ class kasir
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::guard('api')->check() && $request->user()->type >='Kasir'){
+        if(Auth::guard('api')->check() && $request->user()->type =='owner'){
             return $next($request);
         }else{
             $message = ["message" => "Permission Denied"];
             return response($message, 401);
         }
+    
     }
 }

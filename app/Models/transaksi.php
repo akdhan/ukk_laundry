@@ -11,5 +11,5 @@ class transaksi extends Model
     protected $primarykey ='id_transaksi';
     public $timestamps = false;
 
-    protected $fillable = ['id_member', 'tgl', 'batas_waktu', 'tgl_bayar', 'status', 'dibayar', 'id_user'];
+    protected $fillable = ['id_member','id_paket','qty', 'tgl', 'batas_waktu'   , 'status', 'dibayar', 'id_user'];
 }

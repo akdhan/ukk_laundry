@@ -61,14 +61,12 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="{{ asset('assets/img/profile-img.jpg') }}" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+            <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->name }}</span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
-              <span>Web Designer</span>
+              <h6>{{ Auth::user()->name }}</h6>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -85,7 +83,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="{{ route('logout') }}">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sign Out</span>
               </a>
@@ -117,7 +115,7 @@
         </a>
        
       </li><!-- End Member Nav -->
-
+      @if(auth()->user()->type=='Admin')
       <li class="nav-item">
         <a class="nav-link collapsed" href="/paket">
           <i class="bi bi-layout-text-window-reverse"></i><span>Paket</span>
@@ -129,7 +127,7 @@
           <i class="bi bi-cart"></i><span>Outlet</span>
         </a>
       </li><!-- End Outlet Nav -->
-
+      @endif
       <li class="nav-item">
         <a class="nav-link collapsed" href="/transaksi">
           <i class="bi bi-currency-dollar"></i><span>Transaksi</span>
@@ -165,7 +163,9 @@
                     <th scope="col">Alamat</th>
                     <th scope="col">Jenis Kelamin</th>
                     <th scope="col">Telephone</th>
+                    @if(auth()->user()->type=='Admin')
                     <th scope="col">Opsi</th>
+                    @endif
                   </tr>
                 </thead>
                 <tbody>
@@ -177,6 +177,7 @@
                             <td>{{ $data -> jenis_kelamin }}</td>
                             <td>{{ $data -> tlp }}</td>
                             <td>
+                              @if(auth()->user()->type=='Admin')
                             <div class="column">
                                     <a href="{{ route('editmember', $data->id_member) }}" class="btn btn-warning btn-sm">
                                         <i class="bi bi-pencil"></i>
@@ -187,6 +188,7 @@
                                         <button class="btn btn-danger btn-sm">
                                         <i class="bi bi-trash"></i>
                                     </form>
+                                    @endif
                             </div>
                             </td>
                         </tr>

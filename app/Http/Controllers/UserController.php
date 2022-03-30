@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use App\Models\member;
+use App\Models\transaksi;
 use Illuminate\Support\Facades\Hash;
 use JWTAuth;
 use Auth;
@@ -18,8 +20,8 @@ class UserController extends Controller
         $validator = Validator::make($request->all(),[
             'name'=>'required|string|max:255',
             'email'=>'required|string|email|max:255|unique:users',
-            'password'=>'required|string|min:6|confirmed',
-            'type'=>'required|integer'
+            'password'=>'required|string|min:6',
+            'type'=>'required'
         ]);
         if($validator->fails()){
             return response()->json($validator->errors()->toJson(), 400);
@@ -45,7 +47,7 @@ class UserController extends Controller
         }
 
         return redirect('/')->with('alert', 'Email atau password salah!');
-    }
+    } 
     
     public function getAuthenticatedUser()
     {
@@ -171,5 +173,21 @@ class UserController extends Controller
     public function halamanlogin()
     {
         return view ('login');
+    }
+
+    public function show()
+    {
+        $owner = User::where('type', 'Owner')->count();
+        $kasir = User::where('type', 'Kasir')->count();
+        $member = member::count();
+
+        $transaksi = DB::table('transaksis') ->select('transaksis.id_transaksi as id_transaksi','transaksis.*','members.*','pakets.*','users.*')
+                                            // ->join('outlets','outlets.id_outlet', '=', 'transaksis.id_outlet')
+                                            ->join('pakets','pakets.id_paket', '=', 'transaksis.id_paket')
+                                            ->join('users','users.id', '=', 'transaksis.id_user')
+                                            ->join('members','members.id_member', '=', 'transaksis.id_member')->paginate(5);
+
+        return view('index', compact('owner', 'kasir', 'member', 'transaksi'));
+
     }
 }

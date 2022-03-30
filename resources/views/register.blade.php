@@ -71,11 +71,16 @@
                                 <span class="text-danger">{{ $errors->first('password') }}</span>
                                 @endif
                             </div>
-
                             <div class="form-group mb-3">
-                                <div class="checkbox">
-                                    <label><input type="checkbox" name="remember"> Remember Me</label>
-                                </div>
+                                <select class="form-select" name="type" placeholder="Role">
+                                    <option selected>Role</option>
+                                    <option>Admin</option>
+                                    <option>Kasir</option>
+                                    <option>Owner</option>
+                                </select>
+                                @if ($errors->has('type'))
+                                <span class="text-danger">{{ $errors->first('type') }}</span>
+                                @endif
                             </div>
 
                             <div class="d-grid mx-auto">

@@ -62,7 +62,7 @@
                     <p class="text-center small">Enter your username & password to login</p>
                   </div>
 
-                  <form class="row g-3 needs-validation" action="{{ route('postlogin') }}" method="post">
+                  <form class="row g-3 " action="{{ route('postlogin') }}" method="post">
                   @csrf
                     <div class="col-12">
                       <label for="email" class="form-label">Email</label>
@@ -77,7 +77,13 @@
                       <input type="password" name="password" class="form-control" required>
                       <div class="invalid-feedback">Please enter your password!</div>
                     </div>
-
+                   
+                @if (session('alert'))
+                
+                  <div class="text-danger">
+                    {{(session('alert'))}}
+                  </div>
+                  @endif
                     <div class="col-12">
                     </div>
                     <div class="col-12">

@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Validator;
 
 class MemberController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         // $index = member::all();
@@ -100,10 +105,5 @@ class MemberController extends Controller
         // }else{
         //     return Response()->json(['status'=>'Gagal']);
         // }
-    }
-    public function jmlh(){
-        $tampilr=DB::table('members')->count();
-
-        return view('index', compact('tampil'));
     }
 }

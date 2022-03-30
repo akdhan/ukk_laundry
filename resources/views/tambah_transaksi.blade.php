@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -103,7 +103,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="/index">
+        <a class="nav-link collapsed" href="/index">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -128,13 +128,12 @@
         </a>
       </li><!-- End Outlet Nav -->
       @endif
-      @if(auth()->user()->type!='Owner')
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{{route('transaksi')}}">
+        <a class="nav-link" href="{{route('transaksi')}}">
           <i class="bi bi-currency-dollar"></i><span>Transaksi</span>
         </a>
       </li><!-- End Transaksi Nav -->
-      @endif
+
     </ul>
 
   </aside><!-- End Sidebar-->
@@ -142,159 +141,159 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Dashboard</h1>
+      <h1>Transaksi</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="/index">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
+          <li class="breadcrumb-item"><a href="/index">Dashboard</a></li>
+          <li class="breadcrumb-item active">Transaksi</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
+  </div>
+  <div class="section-body">
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">
+                <div class="row">
+                    <div class="col-12 col-md-12 col-lg-12">
+                      <div class="card">
+                        <div class="card-header">
+                          <h4>Tambah Data Transaksi</h4>
+                        </div>
+                        <form action="{{route ('transaksi_tambah')}}" method="POST">
+                          @csrf
+                        <div class="card-body">
+                      
+                        
+                          <div class="form-group">
+                            <label>Pilih Member :</label>
+                            <br>
+                            <select class="form-control col-md-2" name="id_member">
+                            <option value="" selected>--Pilih--</option>  
+                            @foreach ($member as $data_member)
+                            <option value="{{$data_member->id_member}}">{{$data_member->nama_member}}</option>            
+                            @endforeach
+                            </select>  
+                            <label 
+                            @error('id_member') 
+                            class="text-danger"
+                            @enderror>
+                            @error('id_member')
+                            {{$message}}
+                            @enderror
+                          </label>
+                        </div>
+                        
+                        <div class="form-group">
+                          <label>Pilih Paket :</label>
+                          <br>
+                          <select class="form-control col-md-2" name="id_paket">
+                          <option value="" selected>--Pilih--</option>  
+                          @foreach ($paket as $data_paket)
+                          <option value="{{$data_paket->id_paket}}">{{$data_paket->jenis }}</option>            
+                          @endforeach
+                          </select>  
+                          <label 
+                          @error('id_paket') 
+                          class="text-danger"
+                          @enderror>
+                          @error('id_paket')
+                          {{$message}}
+                          @enderror
+                        </label>
+                      </div>
 
-    <section class="section dashboard">
-      <div class="row">
+                      <div class="form-group">
+                        <label>Berat :</label>
+                        <input type="number" class="form-control col-md-2" name="qty">
+                        <label
+                        @error('qty')
+                        class="text-danger"
+                        @enderror>
+                        @error('qty')
+                        {{$message}}
+                        @enderror
+                        </label>
+                        </div>
+                    
 
-        <!-- Left side columns -->
-        <div class="col-lg-12">
-          <div class="row">
+                    <div class="row">
+                      <div class="col-md-4">
+                          <div class="form-group">
+                            <label>Tanggal Transaksi :</label>
+                            <input type="date" class="form-control col-md-6" name="tgl">
+                            <label 
+                            @error('tgl') 
+                            class="text-danger"
+                            @enderror>
+                            @error('tgl')
+                            {{$message}}
+                            @enderror
+                          </label>
+                          </div>
+                          </div>
 
-            <!-- Admin Card -->
-            <div class="col-xxl-4 col-md-4">
-              <div class="card info-card sales-card">
+                          <div class="col-md-4">
+                          <div class="form-group">
+                            <label>Batas Waktu :</label>
+                            <input type="date" class="form-control col-md-6" name="batas_waktu">
+                            <label 
+                            @error('batas_waktu') 
+                            class="text-danger"
+                            @enderror>
+                            @error('batas_waktu')
+                            {{$message}}
+                            @enderror
+                          </label>
+                          </div>
+                          </div>
 
-                <div class="card-body">
-                  <h5 class="card-title">Member</h5>
+                          <div class="form-group">
+                            <label>Status :</label>
+                            <br>
+                            <select class="form-control col-md-2" name="status">
+                            <option value="" selected>--Pilih--</option>
+                            <option value="baru">Baru</option>
+                            <option value="proses">Proses</option>
+                            <option value="selesai">Selesai</option>
+                            <option value="diambil">Diambil</option>
+                            </select> 
+                            <label 
+                            @error('status') 
+                            class="text-danger"
+                            @enderror>
+                            @error('status')
+                            {{$message}}
+                            @enderror
+                          </label>
+                          </div>
 
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-people"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6> 
-                        {{ $member }}
-                      </h6>
-                    </div>
+                          <div class="form-group">
+                            <label>Status Bayar :</label>
+                            <br>
+                            <select class="form-control col-md-2" name="dibayar">
+                            <option value="" selected>--Pilih--</option>
+                            <option value="dibayar">Dibayar</option>
+                            <option value="belum_bayar">Belum dibayar</option>
+                            </select> 
+                            <label 
+                            @error('dibayar') 
+                            class="text-danger"
+                            @enderror>
+                            @error('dibayar')
+                            {{$message}}
+                            @enderror
+                          </label>
+                          </div>
+
+                          <button class="btn btn-primary" type="submit">Tambah</button>
+                          <button class="btn btn-secondary" type="reset">Reset</button>
+                        
                   </div>
-                </div>
+                        </form>
+            </div>
+         </div>
 
-              </div>
-            </div><!-- End Admin Card -->
-
-            <!-- Owner Card -->
-            <div class="col-xxl-4 col-md-4">
-              <div class="card info-card revenue-card">
-
-                <div class="card-body">
-                  <h5 class="card-title">Kasir</h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-people"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>{{ $kasir }}</h6>
-
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div><!-- End Owner Card -->
-
-            <!-- Kasir Card -->
-            <div class="col-xxl-4 col-xl-4">
-
-              <div class="card info-card customers-card">
-
-                <div class="card-body">
-                  <h5 class="card-title">Owner</h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-people"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6> {{ $owner }} </h6>
-
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-
-            </div><!-- End Kasir Card -->
-
-            <!-- Recent Sales -->
-            <div class="col-12">
-              <div class="card recent-sales">
-
-                <div class="card-body">
-                  <h5 class="card-title">Transaksi</h5>
-
-                  <table class="table table-borderless">
-                    <thead>
-                      <tr class="text-center">
-                        <th scope="col">No</th>
-                        <th scope="col">Member</th>
-                        <th scope="col">Paket</th>
-                        <th scope="col">Tanggal Transaksi</th>
-                        <th scope="col">Batas Waktu</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Pembayaran</th>
-                        <th scope="col">User</th>
-                        <th scope="col">Aksi</th>
-
-                      </tr>
-                    </thead>
-                    <tbody>
-                    @foreach ($transaksi as $data)
-                        <tr class="text-center"> 
-                            <td>{{ $loop -> iteration }}</td>
-                            <td>{{ $data -> nama_member}}</td>    
-                            <td>{{ $data -> jenis}}</td>  
-                            <td>{{ $data -> tgl }}</td>
-                            <td>{{ $data -> batas_waktu }}</td>
-                            <td>{{ $data -> status }}</td>  
-                            <td>{{ $data -> dibayar }}</td>
-                            <td>{{ $data -> name }}</td>
-                            <td>
-                            <div class="column">
-                                    <a href="{{ route('editmember', $data->id_member) }}" class="btn btn-warning btn-sm">
-                                        <i class="bi bi-pencil"></i>
-                                    </a>
-                                    <form action="{{ route('deletemember', $data->id_member) }}" method="post" class="d-inline" onsubmit="return confirm('Apakah Anda Yakin?')">
-                                        @method('delete')
-                                        @csrf
-                                        <button class="btn btn-danger btn-sm">
-                                        <i class="bi bi-trash"></i>
-                                    </form>
-                            </div>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-                  </table>
-
-                </div>
-
-              </div>
-            </div><!-- End Recent Sales -->
-            
-
-          </div>
-        </div><!-- End Left side columns -->
-
-        <!-- Right side columns -->
-        <div class="col-lg-4">
-
-
-        </div><!-- End Right side columns -->
-
-      </div>
-    </section>
-
-  </main><!-- End #main -->
-
+    </div>
   <!-- ======= Footer ======= -->
   <!-- <footer id="footer" class="footer">
     <div class="copyright">

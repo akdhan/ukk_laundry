@@ -15,7 +15,7 @@ class CreatePaketsTable extends Migration
     {
         Schema::create('pakets', function (Blueprint $table) {
             $table->bigIncrements('id_paket');
-            $table->enum('jenis', ['kiloan','selimut','bed_cover','kaos']);
+            $table->string('jenis');
             $table->integer('harga');
             $table->timestamps();
         });

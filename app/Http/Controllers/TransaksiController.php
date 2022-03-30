@@ -4,20 +4,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use App\Models\outlet;
+use App\Models\member;
+use App\Models\paket;
 use App\Models\transaksi;
+use App\Models\User;
 use App\Models\detil_transaksi;
 use Carbon\Carbon;
 use JWTAuth;
+use Auth;
 
 class TransaksiController extends Controller
 {
-    public $user;
-
     public function __construct()
     {
-        $this->user = JWTAuth::parseToken()->authenticate();
+        $this->middleware('auth');
     }
-    
     //tambah
     public function store(Request $request)
     {
@@ -29,26 +31,42 @@ class TransaksiController extends Controller
             return response()->json($validator->errors());
         }
 
-        $transaksi = new transaksi();
-        $transaksi->id_member = $request->id_member;
-        $transaksi->tgl = Carbon::now();
-        $transaksi->batas_waktu = Carbon::now()->addDays(3);
-        $transaksi->status = 'baru';
-        $transaksi->dibayar = 'belum_bayar';
-        $transaksi->id_user = $this->user->id;
+        $user = User::where('id', Auth::user()->id)->first();
 
-        $transaksi->save();
+        $transaksi = transaksi::create([
+            'id_member'=>$request->get('id_member'),
+            'id_paket'=>$request->get('id_paket'),
+            'qty'=>$request->get('qty'),
+            'tgl'=>$request->date('Y-m-d'),
+            'batas_waktu'=>date('Y-m-d', strtotime('+3 days', strtotime(date("Y-m-d")))),
+            'status'=>$request->get('status'),
+            'dibayar'=>$request->get('dibayar'),
+            'id_user'=>$user,
+            ]);
+            $id = $request->get('id_paket');
+            $paket = paket::all()->find($id);
 
         $data = transaksi::where('id_transaksi', '=', $transaksi->id)->first();
 
-        return response()->json(['message' => 'Data transaksi berhasil ditambahkan', 'data' => $data]);}
+        return redirect()->route('index')->with('message-simpan','Data berhasil disimpan!');
+    }
 
     public function getAll()
     {
-        $data = DB::table('transaksis')->join('members', 'transaksis.id_member', '=', 'members.id_member')
-                    ->select('transaksis.*', 'members.nama_member')
-                    ->get();
-                    
-        return response()->json(['success' => true, 'data' => $data]);
+
+        $transaksi = DB::table('transaksis') ->select('transaksis.id_transaksi as id_transaksi','transaksis.*','members.*','pakets.*')
+                                            // ->join('outlets','outlets.id_outlet', '=', 'transaksis.id_outlet')
+                                            ->join('pakets','pakets.id_paket', '=', 'transaksis.id_paket')
+                                            ->join('members','members.id_member', '=', 'transaksis.id_member')->paginate(5);
+        return view('transaksi', compact('transaksi'));
     }
+
+    //tampil tambah data transaksi
+    public function tambah(){
+        $outlet = outlet::all();
+        $member = member::all();
+        $paket = paket::all();
+        return view('tambah_transaksi', compact('outlet', 'member', 'paket'));
+    }
+    
 }
