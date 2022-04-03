@@ -135,6 +135,16 @@
         </a>
       </li><!-- End Transaksi Nav -->
       @endif
+      @if(auth()->user()->type=='Admin')
+      <li class="nav-heading">Pages</li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/register">
+          <i class="bi bi-person"></i>
+        <span>Register</span>
+       </a>
+      </li><!-- End Register Page Nav -->
+      @endif
     </ul>
 
   </aside><!-- End Sidebar-->

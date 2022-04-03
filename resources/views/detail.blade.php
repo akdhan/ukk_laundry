@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -103,7 +103,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="/index">
+        <a class="nav-link " href="/index">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -128,12 +128,23 @@
         </a>
       </li><!-- End Outlet Nav -->
       @endif
+      @if(auth()->user()->type!='Owner')
       <li class="nav-item">
-        <a class="nav-link" href="{{route('transaksi')}}">
+        <a class="nav-link collapsed" href="{{route('transaksi')}}">
           <i class="bi bi-currency-dollar"></i><span>Transaksi</span>
         </a>
       </li><!-- End Transaksi Nav -->
+      @endif
+      @if(auth()->user()->type=='Admin')
+      <li class="nav-heading">Pages</li>
 
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/register">
+          <i class="bi bi-person"></i>
+        <span>Register</span>
+       </a>
+      </li><!-- End Register Page Nav -->
+      @endif
     </ul>
 
   </aside><!-- End Sidebar-->
@@ -141,68 +152,74 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Transaksi</h1>
+      <h1>Dashboard</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="/index">Dashboard</a></li>
-          <li class="breadcrumb-item active">Transaksi</li>
+          <li class="breadcrumb-item"><a href="/index">Home</a></li>
+          <li class="breadcrumb-item active">Dashboard</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
-  </div>
-                <table class="table"> 
+
+    <section class="section">
+    <div class="section-header">
+      <h1>Detail Laporan</h1>
+    </div>
+                      
+                      
+                      <table class="table table-striped table-bordered">
                   <tr>
-                    <th><a href="/tambahtransaksi" class="btn btn-icon btn-primary">Tambah</a></th>
-                  </tr>
-                </table>
-                <table class="table table-bordered">
-                  <tr class="text-center">
-                    <th>No</th>
-                    <th>Member</th>
+                    
+                    <th>Nama Member</th>
                     <th>Paket</th>
                     <th>Tanggal Transaksi</th>
                     <th>Batas Waktu</th>
                     <th>Status</th>
                     <th>Pembayaran</th>
-                    <th>User</th>
+                    <th>Berat (Kg)</th>
+                    <th>Harga</th>
                     <th>Aksi</th>
                   </tr>
                   
-                  <tbody>
-                    @foreach ($transaksi as $data)
-                        <tr class="text-center"> 
-                            <td>{{ $loop -> iteration }}</td>
-                            <td>{{ $data -> nama_member}}</td>    
-                            <td>{{ $data -> jenis}}</td>  
-                            <td>{{ $data -> tgl }}</td>
-                            <td>{{ $data -> batas_waktu }}</td>
-                            <td>{{ $data -> status }}</td>
-                            <td>{{ $data -> dibayar }}</td>
-                            <td>{{ $data -> id_user }}</td>
-                            <td>
-                            <div class="column">
-                                    <a href="{{ route('tampil-laporan',$data->id_transaksi) }}" class="btn btn-success btn-sm">
-                                        <i class="bi bi-eye"></i></a>
-                                    <a href="{{ route('edittransaksi', $data->id_transaksi) }}" class="btn btn-warning btn-sm">
-                                        <i class="bi bi-pencil"></i>
-                                    </a>
-                                    <form action="{{ route('deletetransaksi', $data->id_transaksi) }}" method="post" class="d-inline" onsubmit="return confirm('Apakah Anda Yakin?')">
-                                        @method('delete')
-                                        @csrf
-                                        <button class="btn btn-danger btn-sm">
-                                        <i class="bi bi-trash"></i>
-                                    </form>
-                            </div>
-                            </td>
-                        </tr>
+              
+                  
+                  <tr>
+                    @foreach ($member as $members)
+                    <td>{{$members->nama_member}}</td>
                     @endforeach
-                </tbody>
+                    @foreach ($paket as $pakets)
+                    <td>{{$pakets->jenis}}</td>
+                    @endforeach
+                    <td>{{$transaksi->tgl}}</td>
+                    <td>{{$transaksi->batas_waktu}}</td>
+                    <td>{{$transaksi->status}}</td>
+                    <td>{{$transaksi->dibayar}}</td> 
+                    <td>{{$transaksi->qty}} Kg</td> 
+                    @foreach ($detail as $details)
+                    <td>{{$details->qty}}</td>
+                    @endforeach
+                    
+                    <td>
+                      
+                    <a href="{{ route('export',$transaksi->id_transaksi) }}" class="btn btn-primary mt-3 " >Download PDF</a>
+                    </td>
+                  </tr>
+            
 
                 </table>
-            </div>
-         </div>
+                
+                        
+                      </div>
+                      
+                  </div>
+                </div>
 
+              </div>
+            </div>
     </div>
+  </section>
+
+  </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
   <!-- <footer id="footer" class="footer">

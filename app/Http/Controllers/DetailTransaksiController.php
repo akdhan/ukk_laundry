@@ -3,73 +3,54 @@
 namespace App\Http\Controllers;
 use App\Models\detil_transaksi;
 use App\Models\paket;
+use App\Models\member;
+use App\Models\transaksi;
 use App\Helpers\ResponseHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use JWTAuth;
+use PDF;
+use Illuminate\Pagination\Paginator;
 
 class DetailTransaksiController extends Controller
 {
-    public $user;
-    public $response;
-    public function __construct()
+    public function tampil($id)
     {
-        $this->response = new ResponseHelper();
-        $this->user = JWTAuth::parseToken()->authenticate();
-    }
-
-    //tambah
-    public function store(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'id_transaksi' => 'required',
-            'id_paket' => 'required',
-            'qty' => 'required',
-        ]);
-
-        if($validator->fails()) {
-            return $this->response->errorResponse($validator->fails());
-        }
+        $transaksi = DB::table('transaksis') ->select('*')->where('id_transaksi',$id)->first();
+        $member = DB::table('members')->where('id_member',$transaksi->id_member)->get();
+        $paket = DB::table('pakets')->where('id_paket',$transaksi->id_paket)->get();
+        $detail = DB::table('detil_transaksis')->where('id_transaksi',$id)->get();
+                            
+        return view('detail', compact('transaksi','member','paket','detail'));
         
-        $detail = new detil_transaksi();
-        $detail->id_transaksi = $request->id_transaksi;
-        $detail->id_paket = $request->id_paket;
-
-        //tampil
-        $paket = Paket::where('id', '=', $detail->id_paket)->first();
-        $harga = $paket->harga;
-
-        $detail->qty = $request->qty;
-        $detail->subtotal = $detail->qty * $harga;
-
-        $detail->save();
-
-        $data = detil_transaksi::where('id', '=', $detail->id)->first();
-
-        return response()->json(['message' => 'Berhasil tambah detail transaksi', 'data' => $data]);
-
-        //*
     }
 
-    public function getById($id)
-    {
-        //ambil detail dari transaksi tertentu
-
-        $data = DB::table('detil_transaksi')->join('paket', 'detil_transaksi.id_paket', 'paket.id')
-                                            ->select('detil_transaksi.*', 'paket.jenis')
-                                            ->where('detil_transaksi.id_transaksi', '=', $id)
-                                            ->get();
-        return response()->json($data);                        
-    }
-
-    public function getTotal($id)
-    {
-        $total = detil_transaksi::where('id_transaksi', $id)->sum('subtotal');
+    public function export($id){
+        $transaksi = DB::table('transaksis') ->select('*')->where('id_transaksi',$id)->first();
+        $member = DB::table('members')->where('id_member',$transaksi->id_member)->get();
+        $paket = DB::table('pakets')->where('id_paket',$transaksi->id_paket)->get();
+        $detail = DB::table('detil_transaksis')->where('id_transaksi',$id)->get();
+        //mengambil data dan tampilan dari halaman laporan_pdf
+        //data di bawah ini bisa kalian ganti nantinya dengan data dari database
         
-        return response()->json([
-            'total' => $total
-        ]);
+        $data = PDF::loadview('laporan_pdf',compact('transaksi','member','paket','detail'));
+        // $data = PDF::loadview('laporan_pdf',compact('transaksi','outlet','member','paket','detail'));
+        //mendownload laporan.pdf
+    	return $data->download('laporan.pdf');
+    }
+
+    public function tunjuk(){
+        $detail = DB::table('detail_transaksis')->join('transaksis','transaksis.id_transaksi', '=', 'detail_transaksis.id_transaksi')
+                                               ->join('pakets','pakets.id_paket', '=', 'detail_transaksis.id_paket')->paginate(5);
+        Paginator::useBootstrap();
+        return view('detail-transaksi', compact('detail'));
+    }
+
+    //tampil tambah
+    public function tambah(){
+        $transaksi = transaksi::all();
+        $paket = paket::all();
+        return view('detail-tambah', compact('transaksi','paket'));
     }
 }
-// return $this->response->successResponseData('Berhasil tambah detail transaksi', $data);

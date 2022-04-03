@@ -12,7 +12,7 @@ use App\Models\User;
 use App\Models\detil_transaksi;
 use Carbon\Carbon;
 use JWTAuth;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class TransaksiController extends Controller
 {
@@ -24,31 +24,42 @@ class TransaksiController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'id_member' => 'required',
+            'id_member' => 'required|string',
+            'id_paket'=>'required',
+            'qty'=>'required|integer',
+            'tgl'=>'',
+            'batas_waktu'=>'',
+            'status'=>'required',
+            'dibayar'=>'required',
+            // 'id_user'=>'required',
         ]);
 
         if($validator->fails()) {
             return response()->json($validator->errors());
         }
 
-        $user = User::where('id', Auth::user()->id)->first();
-
         $transaksi = transaksi::create([
             'id_member'=>$request->get('id_member'),
             'id_paket'=>$request->get('id_paket'),
             'qty'=>$request->get('qty'),
-            'tgl'=>$request->date('Y-m-d'),
-            'batas_waktu'=>date('Y-m-d', strtotime('+3 days', strtotime(date("Y-m-d")))),
+            'tgl'=>$request->date('tgl'),
+            'batas_waktu'=>$request->date('batas_waktu'),
             'status'=>$request->get('status'),
             'dibayar'=>$request->get('dibayar'),
-            'id_user'=>$user,
+            'id_user'=>Auth()->user()->id,
             ]);
+
             $id = $request->get('id_paket');
-            $paket = paket::all()->find($id);
+            $paket = paket::select('pakets.*')->where('id_paket', $id)->first();
+            // $transaksi = transaksi::where('id_transaksi', '=', $transaksi->id_transaksi)->first();
 
-        $data = transaksi::where('id_transaksi', '=', $transaksi->id)->first();
-
-        return redirect()->route('index')->with('message-simpan','Data berhasil disimpan!');
+            $detail = detil_transaksi::create([
+                'id_transaksi'=> $transaksi->id,
+                'id_paket'=> $paket->id_paket,
+                'qty'=> $transaksi->qty * $paket->harga,
+        ]);
+        // return redirect()->route('index')->with('message-simpan','Data berhasil disimpan!');
+        return redirect('/index');
     }
 
     public function getAll()
@@ -62,11 +73,51 @@ class TransaksiController extends Controller
     }
 
     //tampil tambah data transaksi
-    public function tambah(){
-        $outlet = outlet::all();
+    public function tambah(){   
         $member = member::all();
         $paket = paket::all();
-        return view('tambah_transaksi', compact('outlet', 'member', 'paket'));
+        return view('tambah_transaksi', compact('member', 'paket'));
     }
+        //tampil edit data
+        public function edit($id){
+        
+            $transaksi = DB::table('transaksis')->select('*')->where('id_transaksi', $id)->first();
+            $paket = DB::table('pakets')->select('id_paket','jenis')->get();
+            $member = DB::table('members')->select('id_member','nama_member')->get();
+            return view('edit_transaksi', compact('transaksi','member','paket'));
     
+        }
+
+    //update data
+    public function update(Request $request, $id){
+        $validator = $request->validate([
+            'id_member' => 'required|string',
+            'id_paket'=>'required',
+            'tgl'=>'',
+            'batas_waktu'=>'',
+            'status'=>'required',
+            'dibayar'=>'required',
+        ]);
+        $transaksi = transaksi::where('id_transaksi',$id)->update([
+            'id_member'=>$request->get('id_member'),
+            'id_paket'=>$request->get('id_paket'),
+            'tgl'=>$request->get('tgl'),
+            'batas_waktu'=>$request->get('batas_waktu'),
+            'status'=>$request->get('status'),
+            'dibayar'=>$request->get('dibayar'),
+        ]);
+        return redirect('/transaksi');
+    }
+
+    public function destroy($id)
+    {
+        $detail = detil_transaksi::where('id_transaksi',$id)->delete();
+        $del = transaksi::where('id_transaksi', $id)->delete();
+        return redirect('/transaksi');
+    //     if($del) {
+    //         return Response()->json(['status'=>'Berhasil']);
+    //     }else{
+    //         return Response()->json(['status'=>'Gagal']);
+    //     }
+     }
 }

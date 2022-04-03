@@ -7,6 +7,7 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\OutletController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\DetailTransaksiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,9 +76,17 @@ Route::get('/index', [UserController::class,'show']);
     Route::get('/transaksi', [TransaksiController::class,'getAll'])->name('transaksi');
     Route::post('/transaksitambah', [TransaksiController::class,'store'])->name('transaksi_tambah');
     Route::get('/tambahtransaksi', [TransaksiController::class,'tambah'])->name('tambahtransaksi');
-
-
+    Route::post('/transaksiedit/{id_transaksi}',[TransaksiController::class,'update'])->name('transaksi_edit');
+    Route::get('/edit_transaksi/{id_transaksi}',[TransaksiController::class,'edit'])->name('edittransaksi'); 
+    Route::delete('/delete_transaksi/{id_transaksi}',[TransaksiController::class,'destroy'])->name('deletetransaksi');
     
+    //detail
+    Route::get('/detail-transaksi',[DetailTransaksiController::class,'tunjuk'])->name('tampil-detail');
+    Route::get('/detail-transaksi/tambah',[DetailTransaksiController::class,'tambah'])->name('tambah-detail');
+    Route::get('/laporan/{id_detrans}',[DetailTransaksiController::class,'tampil'])->name('tampil-laporan');
+    Route::get('/exportlaporan/{id_detrans}',[DetailTransaksiController::class,'export'])->name('export');
+
+
 
 
 

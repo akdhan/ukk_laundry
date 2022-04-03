@@ -36,7 +36,7 @@ class UserController extends Controller
 
         // $token = JWTAuth::fromUser($user);
 
-        return redirect('/')->with('message-simpan', 'Berhasil Membuat Akun');
+        return redirect('/index')->with('message-simpan', 'Berhasil Membuat Akun');
     }
     
     public function login(Request $request)

@@ -1,11 +1,11 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Dashboard - Laundry</title>
+  <title>TambahMember - Laundry</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -43,7 +43,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="/index" class="logo d-flex align-items-center">
+      <a href="/" class="logo d-flex align-items-center">
         <span class="d-none d-lg-block">Xi Laundry</span>
       </a><br>
       <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -115,7 +115,7 @@
         </a>
        
       </li><!-- End Member Nav -->
-      @if(auth()->user()->type=='Admin')
+
       <li class="nav-item">
         <a class="nav-link collapsed" href="/paket">
           <i class="bi bi-layout-text-window-reverse"></i><span>Paket</span>
@@ -127,9 +127,9 @@
           <i class="bi bi-cart"></i><span>Outlet</span>
         </a>
       </li><!-- End Outlet Nav -->
-      @endif
+
       <li class="nav-item">
-        <a class="nav-link" href="/tambahtransaksi">
+        <a class="nav-link" href="/transaksi">
           <i class="bi bi-currency-dollar"></i><span>Transaksi</span>
         </a>
       </li><!-- End Transaksi Nav -->
@@ -137,19 +137,19 @@
     </ul>
 
   </aside><!-- End Sidebar-->
-
+  
   <main id="main" class="main">
 
-    <div class="pagetitle">
-      <h1>Transaksi</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="/index">Dashboard</a></li>
-          <li class="breadcrumb-item active">Transaksi</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
-  </div>
+<div class="pagetitle">
+  <h1>Transaksi</h1>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/index">Dashboard</a></li>
+      <li class="breadcrumb-item active">Transaksi</li>
+    </ol>
+  </nav>
+</div><!-- End Page Title -->
+</div>
   <div class="section-body">
         <div class="row">
             <div class="col-12 col-md-12 col-lg-12">
@@ -157,21 +157,22 @@
                     <div class="col-12 col-md-12 col-lg-12">
                       <div class="card">
                         <div class="card-header">
-                          <h4>Tambah Data Transaksi</h4>
+                          <h4>Edit Data Transaksi</h4>
                         </div>
-                        <form action="{{route ('transaksi_tambah')}}" method="POST">
+                        <form class="row g-3" action="{{route('transaksi_edit', $transaksi->id_transaksi)}}" method="post">
                           @csrf
                         <div class="card-body">
-                      
-                        
+                          
                           <div class="form-group">
-                            <label>Pilih Member :</label>
+                            <label>Member:</label>
                             <br>
                             <select class="form-control col-md-2" name="id_member">
-                            <option value="" selected>--Pilih--</option>  
-                            @foreach ($member as $data_member)
-                            <option value="{{$data_member->id_member}}">{{$data_member->nama_member}}</option>            
-                            @endforeach
+                            
+                             @foreach ($member as $data)
+                             
+                            <option value="{{$data->id_member}}"{{old('id_member',$transaksi->id_member) == $data->id_member  ? "selected" : ''}}>{{$data->nama_member}}</option>
+                             
+                            @endforeach 
                             </select>  
                             <label 
                             @error('id_member') 
@@ -181,132 +182,122 @@
                             {{$message}}
                             @enderror
                           </label>
-                        </div>
-                        
-                        <div class="form-group">
-                          <label>Pilih Paket :</label>
-                          <br>
-                          <select class="form-control col-md-2" name="id_paket">
-                          <option value="" selected>--Pilih--</option>  
-                          @foreach ($paket as $data_paket)
-                          <option value="{{$data_paket->id_paket}}">{{$data_paket->jenis }}</option>            
-                          @endforeach
-                          </select>  
-                          <label 
-                          @error('id_paket') 
-                          class="text-danger"
-                          @enderror>
-                          @error('id_paket')
-                          {{$message}}
-                          @enderror
-                        </label>
-                      </div>
-
-                      <div class="form-group">
-                        <label>Berat :</label>
-                        <input type="number" class="form-control col-md-2" name="qty">
-                        <label
-                        @error('qty')
-                        class="text-danger"
-                        @enderror>
-                        @error('qty')
-                        {{$message}}
-                        @enderror
-                        </label>
-                        </div>
-                    
-
-                    <div class="row">
-                      <div class="col-md-4">
-                          <div class="form-group">
-                            <label>Tanggal Transaksi :</label>
-                            <input type="date" class="form-control col-md-6" name="tgl">
-                            <label 
-                            @error('tgl') 
-                            class="text-danger"
-                            @enderror>
-                            @error('tgl')
-                            {{$message}}
-                            @enderror
-                          </label>
-                          </div>
-                          </div>
-
-                          <div class="col-md-4">
-                          <div class="form-group">
-                            <label>Batas Waktu :</label>
-                            <input type="date" class="form-control col-md-6" name="batas_waktu">
-                            <label 
-                            @error('batas_waktu') 
-                            class="text-danger"
-                            @enderror>
-                            @error('batas_waktu')
-                            {{$message}}
-                            @enderror
-                          </label>
-                          </div>
                           </div>
 
                           <div class="form-group">
-                            <label>Status :</label>
+                            <label>Paket:</label>
                             <br>
-                            <select class="form-control col-md-2" name="status">
-                            <option value="" selected>--Pilih--</option>
-                            <option value="baru">Baru</option>
-                            <option value="proses">Proses</option>
-                            <option value="selesai">Selesai</option>
-                            <option value="diambil">Diambil</option>
-                            </select> 
+                            <select class="form-control col-md-2" name="id_paket">
+                            
+                             @foreach ($paket as $data)
+                             
+                            <option value="{{$data->id_paket}}"{{old('id_paket',$transaksi->id_paket) == $data->id_paket  ? "selected" : ''}}>{{$data->jenis}}</option>
+                             
+                            @endforeach 
+                            </select>  
                             <label 
-                            @error('status') 
+                            @error('id_paket') 
                             class="text-danger"
                             @enderror>
-                            @error('status')
+                            @error('id_paket')
                             {{$message}}
                             @enderror
                           </label>
                           </div>
 
-                          <div class="form-group">
-                            <label>Status Bayar :</label>
-                            <br>
-                            <select class="form-control col-md-2" name="dibayar">
-                            <option value="" selected>--Pilih--</option>
-                            <option value="dibayar">Dibayar</option>
-                            <option value="belum_bayar">Belum dibayar</option>
-                            </select> 
-                            <label 
-                            @error('dibayar') 
-                            class="text-danger"
-                            @enderror>
-                            @error('dibayar')
-                            {{$message}}
-                            @enderror
-                          </label>
-                          </div>
 
-                          <button class="btn btn-primary" type="submit">Tambah</button>
+                          <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                  <label>Tanggal Transaksi :</label>
+                                  <input type="date" name="tgl"
+                                  @if (old('tgl'))
+                            value="{{old('tgl')}}" 
+                            @else
+                            value="{{$transaksi->tgl}}" 
+                            @endif
+                                  class="form-control col-md-6">
+                                  <label 
+                                  @error('tgl') 
+                                  class="text-danger"
+                                  @enderror>
+                                  @error('tgl')
+                                  {{$message}}
+                                  @enderror
+                                </label>
+                                </div>
+                                </div>
+      
+                                <div class="col-md-4">
+                                <div class="form-group">
+                                  <label>Batas Waktu :</label>
+                                  <input type="date" name="batas_waktu" 
+                                  @if (old('batas_waktu'))
+                                      value="{{old('batas_waktu')}}"
+                                  @else
+                                  value="{{$transaksi->batas_waktu}}"
+                                  @endif
+                                  class="form-control col-md-6" >
+                                  <label 
+                                  @error('batas_waktu') 
+                                  class="text-danger"
+                                  @enderror>
+                                  @error('batas_waktu')
+                                  {{$message}}
+                                  @enderror
+                                </label>
+                                </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                  <label>Status :</label>
+                                  <br>
+                                  <select name="status"
+                                  class="form-control col-md-2" >
+                                  {{-- <option value="" selected>--Pilih--</option> --}}
+                                  <option value="baru"{{ old('status', $transaksi->status) == 'baru' ? 'selected' : '' }}>Baru</option>
+                                  <option value="proses"{{ old('status', $transaksi->status) == 'proses' ? 'selected' : '' }}>Proses</option>
+                                  <option value="selesai"{{ old('status', $transaksi->status) == 'selesai' ? 'selected' : '' }}>Selesai</option>
+                                  <option value="diambil"{{ old('status', $transaksi->status) == 'diambil' ? 'selected' : '' }}>Diambil</option>
+                                  </select> 
+                                  <label 
+                                  @error('status') 
+                                  class="text-danger"
+                                  @enderror>
+                                  @error('status')
+                                  {{$message}}
+                                  @enderror
+                                </label>
+                                </div>
+      
+                                <div class="form-group">
+                                  <label>Status Bayar :</label>
+                                  <br>
+                                  <select name="dibayar"
+                                  class="form-control col-md-2" >
+                                  {{-- <option value="" selected>--Pilih--</option> --}}
+                                  <option value="dibayar"{{ old('dibayar', $transaksi->dibayar) == 'dibayar' ? 'selected' : '' }}>Dibayar</option>
+                                  <option value="belum_bayar"{{ old('dibayar', $transaksi->dibayar) == 'belum_bayar' ? 'selected' : '' }}>Belum dibayar</option>
+                                  </select> 
+                                  <label 
+                                  @error('dibayar') 
+                                  class="text-danger"
+                                  @enderror>
+                                  @error('dibayar')
+                                  {{$message}}
+                                  @enderror
+                                </label>
+                                </div>
+      
+                          <button class="btn btn-primary" type="submit">Simpan</button>
                           <button class="btn btn-secondary" type="reset">Reset</button>
                         
-                  </div>
                         </form>
+                  </div>
             </div>
          </div>
 
     </div>
-  <!-- ======= Footer ======= -->
-  <!-- <footer id="footer" class="footer">
-    <div class="copyright">
-      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
-    </div>
-    <div class="credits"> -->
-      <!-- All the links in the footer should remain intact. -->
-      <!-- You can delete the links only if you purchased the pro version. -->
-      <!-- Licensing information: https://bootstrapmade.com/license/ -->
-      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-    </div>
-  </footer>End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
