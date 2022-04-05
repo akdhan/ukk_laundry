@@ -133,6 +133,16 @@
           <i class="bi bi-currency-dollar"></i><span>Transaksi</span>
         </a>
       </li><!-- End Transaksi Nav -->
+      @if(auth()->user()->type=='Admin')
+      <li class="nav-heading">Pages</li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/register">
+          <i class="bi bi-person"></i>
+        <span>Register</span>
+       </a>
+      </li><!-- End Register Page Nav -->
+      @endif
 
     </ul>
 
@@ -145,7 +155,7 @@
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="/index">Dashboard</a></li>
-          <li class="breadcrumb-item active">Transaksi</li>
+          <li class="breadcrumb-item active">Tambah Transaksi</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->

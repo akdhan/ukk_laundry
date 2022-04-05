@@ -38,7 +38,8 @@ Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 Route::get('/index', [UserController::class,'show']);
 
-
+//pengurus
+Route::get('/data-user',[UserController::class,'tampil'])->name('tampil-user');
 //Admin
 
     Route::get('/index',[UserController::class,'show']); 

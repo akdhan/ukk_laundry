@@ -73,7 +73,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+              <a class="dropdown-item d-flex align-items-center" href="{{ route('tampil-user') }}">
                 <i class="bi bi-person"></i>
                 <span>My Profile</span>
               </a>
@@ -108,12 +108,12 @@
           <span>Dashboard</span>
         </a>
       </li><!-- End Dashboard Nav -->
-
+      @if(auth()->user()->type!='Owner')
       <li class="nav-item">
       <a class="nav-link collapsed" href="/member">
           <i class="bi bi-person"></i><span>Member</span>
         </a>
-       
+      @endif
       </li><!-- End Member Nav -->
       @if(auth()->user()->type=='Admin')
       <li class="nav-item">
@@ -130,7 +130,7 @@
       @endif
       @if(auth()->user()->type!='Owner')
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{{route('transaksi')}}">
+        <a class="nav-link collapsed" href="/tambahtransaksi">
           <i class="bi bi-currency-dollar"></i><span>Transaksi</span>
         </a>
       </li><!-- End Transaksi Nav -->
@@ -269,15 +269,19 @@
                             <td>{{ $data -> name }}</td>
                             <td>
                             <div class="column">
-                                    <a href="{{ route('editmember', $data->id_member) }}" class="btn btn-warning btn-sm">
+                                    <a href="{{ route('tampil-laporan',$data->id_transaksi) }}" class="btn btn-success btn-sm">
+                                        <i class="bi bi-eye"></i></a>
+                                  @if(auth()->user()->type!='Owner')
+                                    <a href="{{ route('edittransaksi', $data->id_transaksi) }}" class="btn btn-warning btn-sm">
                                         <i class="bi bi-pencil"></i>
                                     </a>
-                                    <form action="{{ route('deletemember', $data->id_member) }}" method="post" class="d-inline" onsubmit="return confirm('Apakah Anda Yakin?')">
+                                    <form action="{{ route('deletetransaksi', $data->id_transaksi) }}" method="post" class="d-inline" onsubmit="return confirm('Apakah Anda Yakin?')">
                                         @method('delete')
                                         @csrf
                                         <button class="btn btn-danger btn-sm">
                                         <i class="bi bi-trash"></i>
                                     </form>
+                                  @endif
                             </div>
                             </td>
                         </tr>

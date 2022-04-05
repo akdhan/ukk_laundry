@@ -129,10 +129,20 @@
       </li><!-- End Outlet Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="/transaksi">
+        <a class="nav-link collapsed" href="/tambahtransaksi">
           <i class="bi bi-currency-dollar"></i><span>Transaksi</span>
         </a>
       </li><!-- End Transaksi Nav -->
+      @if(auth()->user()->type=='Admin')
+      <li class="nav-heading">Pages</li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/register">
+          <i class="bi bi-person"></i>
+        <span>Register</span>
+       </a>
+      </li><!-- End Register Page Nav -->
+      @endif
 
     </ul>
 

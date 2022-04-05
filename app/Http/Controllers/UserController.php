@@ -12,6 +12,7 @@ use JWTAuth;
 use Auth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use DB;
+use Illuminate\Pagination\Paginator;
 
 class UserController extends Controller
 {
@@ -189,5 +190,12 @@ class UserController extends Controller
 
         return view('index', compact('owner', 'kasir', 'member', 'transaksi'));
 
+    }
+
+    public function tampil(){
+        $data = DB::table('users')->paginate(5);
+        Paginator::useBootstrap();
+        return view('profile',['user' => $data]);
+        
     }
 }

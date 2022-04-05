@@ -108,12 +108,12 @@
           <span>Dashboard</span>
         </a>
       </li><!-- End Dashboard Nav -->
-
+      @if(auth()->user()->type!='Owner')
       <li class="nav-item">
       <a class="nav-link collapsed" href="/member">
           <i class="bi bi-person"></i><span>Member</span>
         </a>
-       
+      @endif
       </li><!-- End Member Nav -->
       @if(auth()->user()->type=='Admin')
       <li class="nav-item">
@@ -152,18 +152,17 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Dashboard</h1>
+      <h1>Detail Laporan</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="/index">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
+          <li class="breadcrumb-item active">Detail Laporan</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
 
     <section class="section">
     <div class="section-header">
-      <h1>Detail Laporan</h1>
     </div>
                       
                       

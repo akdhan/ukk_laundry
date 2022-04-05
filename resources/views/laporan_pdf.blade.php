@@ -11,7 +11,7 @@
 </head>
 <center>
 
-    <h3>PERMATA LAUNDRY</h3>
+    <h3>XI LAUNDRY</h3>
 </center>
 <p>Nota Pembayaran Laundry :</p>
 <body>

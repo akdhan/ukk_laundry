@@ -106,14 +106,14 @@ class TransaksiController extends Controller
             'status'=>$request->get('status'),
             'dibayar'=>$request->get('dibayar'),
         ]);
-        return redirect('/transaksi');
+        return redirect('/index');
     }
 
     public function destroy($id)
     {
         $detail = detil_transaksi::where('id_transaksi',$id)->delete();
         $del = transaksi::where('id_transaksi', $id)->delete();
-        return redirect('/transaksi');
+        return redirect('/index');
     //     if($del) {
     //         return Response()->json(['status'=>'Berhasil']);
     //     }else{
