@@ -213,7 +213,7 @@
                       </div>
 
                       <div class="form-group">
-                        <label>Berat :</label>
+                        <label>Berat / Jumlah :</label>
                         <input type="number" class="form-control col-md-2" name="qty">
                         <label
                         @error('qty')

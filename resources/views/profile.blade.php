@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Dashboard - Laundry</title>
+  <title>Profile - Laundry</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -152,30 +152,28 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Dashboard</h1>
+      <h1>User Profile</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="/index">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
+          <li class="breadcrumb-item active">Profile</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
 
     <section class="section">
-    <div class="section-header">
-      <h1>Profile</h1>
-    </div>
                 <div class="row">
               <div class="col-12 col-sm-12 col-lg-12">
                 <div class="card author-box card-primary">
                   <div class="card-body">
                     <div class="author-box-left">
                       <img alt="image" src="../assets/img/avatar-3.png" class="rounded-circle author-box-picture">
+                      <br>
               
                     <div class="author-box-details">
-                      <div class="author-box-name">{{ Auth::user()->name}}</div>
-                      <div class="author-box-job">{{Auth::user()->email}}</div>  
-                      <div class="author-box-job">{{Auth::user()->type}}</div>
+                      <div class="author-box-name">Nama : {{ Auth::user()->name}}</div>
+                      <div class="author-box-job">Email : {{Auth::user()->email}}</div>  
+                      <div class="author-box-job">Posisi : {{Auth::user()->type}}</div>
                       <div class="author-box-description">
                         
                       </div>
