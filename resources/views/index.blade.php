@@ -256,7 +256,7 @@
 
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody> 
                     @foreach ($transaksi as $data)
                         <tr class="text-center"> 
                             <td>{{ $loop -> iteration }}</td>
